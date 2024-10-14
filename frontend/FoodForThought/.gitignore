@@ -1,0 +1,53 @@
+# Expo
+.expo/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+dist/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# macOS
+.DS_Store
+
+# Android
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+*.apk
+
+# IDE
+.idea/
+.vscode/
+
+# Environment variables
+.env
+
+# Temporary files
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# Logs
+logs
+*.log
+
+# Test coverage
+coverage/
+
+# React Native
+*.ipa
+*.xcarchive
+
+# Misc
+*.lock
+!yarn.lock
