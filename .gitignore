@@ -1,6 +1,38 @@
+# Environment Variables
+.env
 
-*.jpg
-*.jpeg
-*.png
+# Pytest
+.cache/
+*.cover
+*.coverage
+nosetests.xml
+coverage.xml
+*.log
 
+# Data
+datasets/
+food_detection-2/
+Fruits-and-Vegetables-1/
+IngrDetection-3/
+Sliced-Fruits-and-Vegetables-9/
+
+# Weights and Checkpoints
+weights/
 *.pt
+
+# IDEs
+.vscode/
+.idea/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
+*.bak
+*.tmp
+*.swp
+*.swo
+
+base64_image.txt
+>>>>>>> c0f515b (render push)
