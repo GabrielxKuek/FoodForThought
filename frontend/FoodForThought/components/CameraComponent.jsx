@@ -9,7 +9,7 @@ import {
   ImageBackground,
   Image,
 } from 'react-native';
-import { Camera } from 'expo-camera';
+import { Camera, CameraType, FlashMode } from 'expo-camera';
 
 let camera;
 
@@ -17,11 +17,11 @@ export default function CameraComponent() {
   const [startCamera, setStartCamera] = React.useState(false);
   const [previewVisible, setPreviewVisible] = React.useState(false);
   const [capturedImage, setCapturedImage] = React.useState(null);
-  const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back);
-  const [flashMode, setFlashMode] = React.useState('off');
+  const [cameraType, setCameraType] = React.useState(CameraType.back);
+  const [flashMode, setFlashMode] = React.useState(FlashMode.off);
 
   const __startCamera = async () => {
-    const { status } = await Camera.requestCameraPermissionsAsync();
+    const { status } = await Camera.requestCameraPermissions();
     if (status === 'granted') {
       setStartCamera(true);
     } else {
@@ -47,20 +47,18 @@ export default function CameraComponent() {
   };
 
   const __handleFlashMode = () => {
-    if (flashMode === 'on') {
-      setFlashMode('off');
-    } else if (flashMode === 'off') {
-      setFlashMode('on');
+    if (flashMode === FlashMode.off) {
+      setFlashMode(FlashMode.on);
+    } else if (flashMode === FlashMode.on) {
+      setFlashMode(FlashMode.auto);
     } else {
-      setFlashMode('auto');
+      setFlashMode(FlashMode.off);
     }
   };
 
   const __switchCamera = () => {
-    setCameraType((prevType) =>
-      prevType === Camera.Constants.Type.back
-        ? Camera.Constants.Type.front
-        : Camera.Constants.Type.back
+    setCameraType((prevCameraType) =>
+      prevCameraType === CameraType.back ? CameraType.front : CameraType.back
     );
   };
 
@@ -100,11 +98,11 @@ export default function CameraComponent() {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <TouchableOpacity
+                 <TouchableOpacity
                     onPress={__handleFlashMode}
                     style={{
-                      backgroundColor: flashMode === 'off' ? '#000' : '#fff',
-                      borderRadius: '50%',
+                      backgroundColor: flashMode === FlashMode.off ? '#000' : '#fff',
+                      borderRadius: 25,
                       height: 25,
                       width: 25,
                     }}
@@ -121,7 +119,7 @@ export default function CameraComponent() {
                     }}
                   >
                     <Text style={{ fontSize: 20 }}>
-                      {cameraType === Camera.Constants.Type.front ? '🤳' : '📷'}
+                      {cameraType === CameraType.front ? '🤳' : '📷'}
                     </Text>
                   </TouchableOpacity>
                 </View>
