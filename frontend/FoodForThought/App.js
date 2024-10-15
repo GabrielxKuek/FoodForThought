@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomePage from './app/HomePage';
 import CategoryItems from './app/CategoryItems';
 
+
 const Stack = createStackNavigator();
 
 const App = () => {

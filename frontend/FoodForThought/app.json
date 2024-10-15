@@ -1,3 +1,4 @@
+
 {
   "expo": {
     "name": "FoodForThought",
@@ -11,6 +12,16 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.FoodForThought"
@@ -25,4 +36,5 @@
       "favicon": "./assets/favicon.png"
     }
   }
+  
 }
