@@ -1,11 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Blueprint
 import base64
 import os
 
 app = Flask(__name__)
+read_base64 = Blueprint('read_base64', __name__)
 
-@app.route('/upload', methods=['POST'])
-def upload_base64_image():
+@app.route('/', methods=['POST'])
+def read_base64():
     base64_file_path = "../base64_image.txt"
 
     try:

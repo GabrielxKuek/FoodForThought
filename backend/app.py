@@ -1,8 +1,22 @@
-import os
-from flask import Flask, request, jsonify
+from flask import Blueprint, Flask, render_template, request, jsonify
+# from controller.yolov10 import detect  # Importing the blueprint for /second
+# from controller.read_base64 import read_base64    # Importing the blueprint for /third
+import torch
+from PIL import Image
+import base64
+import io
+
 
 app = Flask(__name__)
-CORS(app)
+
+# Root route ("/") in the main app file
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+# Register the blueprints for the other routes
+# app.register_blueprint(detect, url_prefix='/second')  # "/second"
+# app.register_blueprint(read_base64, url_prefix='/third')    # "/third"
 
 model = torch.hub.load(
     'recipe-detection',
@@ -10,12 +24,8 @@ model = torch.hub.load(
     'weights/yolov10b.pt'
 )
 
-@app.route('/hello/', methods=['GET', 'POST'])
-def welcome():
-    return "Hello World!"
-
 @app.route('/detect', methods=['POST'])
-def detect_objects():
+def detect():
     data = request.json
     if 'image' not in data:
         return jsonify({'error': 'No image provided'}), 400
@@ -32,7 +42,5 @@ def detect_objects():
     
     return jsonify({'detections': detections})
 
-
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 105))  # Default to 105 if PORT is not set
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
