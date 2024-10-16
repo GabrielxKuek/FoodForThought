@@ -1,30 +1,41 @@
-from flask import Blueprint, render_template, redirect, request, jsonify
+from flask import Blueprint, request, jsonify
+from inference_sdk import InferenceHTTPClient
+import os
+from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
+
+# Initialize Blueprint
 analyze_ingredients_bp = Blueprint('analyze_ingredients', __name__, template_folder='templates')
 
+# Ingredient detection function
+def ingredient_detection(image_path):
+    api_key = os.getenv('ROBOFLOW_APIKEY')
+
+    # Initialize the client
+    CLIENT = InferenceHTTPClient(
+        api_url="https://outline.roboflow.com",
+        api_key=api_key
+    )
+
+    # Perform inference on the image
+    result = CLIENT.infer(image_path, model_id="grocery-products-detection/5")
+    
+    # Return the result
+    return result
+
+# Endpoint to handle ingredient analysis requests
 @analyze_ingredients_bp.route('/analyze_ingredients', methods=['POST'])
-def index():
-    return jsonify({
-        "id": "chatcmpl-123",
-        "object": "chat.completion",
-        "created": 1677652288,
-        "model": "gpt-4o-mini",
-        "system_fingerprint": "fp_44709d6fcb",
-        "choices": [{
-            "index": 0,
-            "message": {
-                "role": "assistant",
-                "content": "Cheese, 1, Sausages, 1, Tomatoes, 1",
-            },
-            "logprobs": None,
-            "finish_reason": "stop"
-        }],
-        "usage": {
-            "prompt_tokens": 9,
-            "completion_tokens": 12,
-            "total_tokens": 21,
-            "completion_tokens_details": {
-                "reasoning_tokens": 0
-            }
-        }
-    })
+def analyze_ingredients():
+    # Check if the request has a file or URL
+    if 'image_url' in request.json:
+        image_url = request.json['image_url']
+        try:
+            # Call the ingredient detection function with the image URL
+            result = ingredient_detection(image_url)
+            return jsonify({"status": "success", "result": result}), 200
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)}), 500
+    else:
+        return jsonify({"status": "error", "message": "No image URL provided."}), 400

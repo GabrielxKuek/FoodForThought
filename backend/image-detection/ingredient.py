@@ -6,13 +6,15 @@ load_dotenv()
 
 # define
 
-api_key = os.getenv('ROBOFLOW_APIKEY')
+def ingredient_detection(image_path):
+    api_key = os.getenv('ROBOFLOW_APIKEY')
 
-# code
+    # code
+    CLIENT = InferenceHTTPClient(
+        api_url="https://outline.roboflow.com",
+        api_key=api_key
+    )
 
-CLIENT = InferenceHTTPClient(
-    api_url="https://outline.roboflow.com",
-    api_key=api_key
-)
+    result = CLIENT.infer(image_path, model_id="malaysian-food-recognition-ourez/5")
 
-result = CLIENT.infer("lemak.jpg", model_id="malaysian-food-recognition-ourez/5")
+    return result
