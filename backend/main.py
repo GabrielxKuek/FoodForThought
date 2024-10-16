@@ -1,4 +1,5 @@
 from flask import Flask
+import os
 from blueprints.receipt_manager.analyze_receipt import analyze_receipt_bp
 from blueprints.recipe_manager.analyze_recipe import analyze_recipe_bp
 from blueprints.recipe_manager.analyze_ingredients import analyze_ingredients_bp
