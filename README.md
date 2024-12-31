@@ -35,7 +35,7 @@ Consolation Prize Winner at Tryhack 2024 (Singapore Polytechnic) - 4th Place (ti
 | Feature | Description | Demo |
 | ------- | ----------- | ---- |
 | **Computer Vision Detection** | Utilizes advanced AI models to identify vegetables and produce in real-time | <img src="assets/AIDemo.jpg" alt="AI Demo"> |
-| Intelligent Receipt Processing | Inventory tracking functionality with a user-friendly interface to minimize food waste by preventing overbuying. | <img src="assets/FrontendDemo.jpg" alt="Frontend Demo"> |
+| **Inventory Tracking** | Inventory tracking functionality with a user-friendly interface to minimize food waste by preventing overbuying. | <img src="assets/FrontendDemo.jpg" alt="Frontend Demo"> |
 | **Intelligent Receipt Processing** | Combines OCR technology with AI to accurately interpret receipts, even when damaged or faded. | The system uses OCRSpace for initial text extraction, then leverages ChatGPT to fill in gaps and interpret unclear text based on context, ensuring reliable inventory tracking. |
 | **Smart Recipe Suggestions** | Generates recipe recommendations based on detected ingredients to minimize food waste by encouraging the use of food users already have. | - |
 
